@@ -1466,7 +1466,7 @@
             }
         });
 
-        // Mobile menu toggle
+        // Mobile menu toggle + navigation
         const navLinksEl = document.querySelector('.nav-links');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navOverlay = document.getElementById('navOverlay');
@@ -1478,13 +1478,35 @@
             document.body.style.overflow = navLinksEl.classList.contains('active') ? 'hidden' : '';
         }
 
-        // Close menu when a link is clicked
+        function closeMenu() {
+            navLinksEl.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Mobile menu links: close the panel, then scroll to the section
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinksEl.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                navOverlay.classList.remove('active');
-                document.body.style.overflow = '';
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = targetId && targetId.length > 1 ? document.querySelector(targetId) : null;
+                const wasOpen = navLinksEl.classList.contains('active');
+                closeMenu();
+
+                const scrollToTarget = () => {
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                };
+
+                if (wasOpen) {
+                    // wait for the panel's slide-out transition so the browser
+                    // has settled layout before it calculates the scroll position
+                    setTimeout(scrollToTarget, 320);
+                } else {
+                    scrollToTarget();
+                }
             });
         });
 
@@ -1506,11 +1528,14 @@
             observer.observe(el);
         });
 
-        // Smooth scroll
+        // Smooth scroll (links outside the mobile nav panel, e.g. buttons in the page body)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            if (anchor.closest('.nav-links')) return; // handled above
             anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (!targetId || targetId.length < 2) return;
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(targetId);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
