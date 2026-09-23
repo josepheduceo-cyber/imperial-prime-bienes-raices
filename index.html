@@ -42,6 +42,11 @@
             scroll-behavior: smooth;
         }
 
+        a, button, .btn, .mobile-menu {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
         #inicio,
         #propiedades,
         #servicios,
@@ -216,7 +221,7 @@
         }
         .top-bar strong { color: var(--gold); font-weight: 600; }
         .top-bar-sep { color: var(--gray-dark); margin: 0 0.6rem; }
-        @media (max-width: 600px) {
+        @media (max-width: 900px) {
             .top-bar { font-size: 0.65rem; padding: 0.4rem 1rem; }
             .top-bar-sep, .top-bar span:last-child { display: none; }
             nav { top: 28px; }
@@ -336,10 +341,16 @@
         .mobile-menu {
             display: none;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
             gap: 5px;
             cursor: pointer;
             z-index: 1001;
             position: relative;
+            min-width: 44px;
+            min-height: 44px;
+            padding: 10px;
+            margin: -10px;
         }
 
         .mobile-menu span {
@@ -365,6 +376,7 @@
         .hero {
             margin-top: 114px;
             min-height: 90vh;
+            min-height: 90dvh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -999,7 +1011,7 @@
         }
 
         /* RESPONSIVE */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             #inicio,
             #propiedades,
             #servicios,
@@ -1016,6 +1028,7 @@
                 top: 0;
                 right: 0;
                 height: 100vh;
+                height: 100dvh;
                 width: min(82vw, 320px);
                 background: rgba(8, 8, 8, 0.98);
                 backdrop-filter: blur(12px);
@@ -1082,7 +1095,10 @@
                 position: fixed;
                 inset: 0;
                 background: rgba(0, 0, 0, 0.55);
-                z-index: 1001;
+                /* Must stay BELOW nav's stacking context (z-index: 1000), otherwise
+                   it visually and interactively covers the slide-out menu links,
+                   making every mobile menu button unresponsive to taps. */
+                z-index: 900;
             }
 
             .nav-overlay.active {
@@ -1096,6 +1112,7 @@
             .hero {
                 margin-top: 100px;
                 min-height: 80vh;
+                min-height: 80dvh;
             }
 
             .hero-logo {
@@ -1130,6 +1147,32 @@
             .services,
             .contact {
                 padding: 5rem 0;
+            }
+        }
+
+        /* Small phones: tighter spacing so nothing crowds or overflows */
+        @media (max-width: 400px) {
+            .container,
+            .nav-container {
+                padding-left: 1.1rem;
+                padding-right: 1.1rem;
+            }
+
+            .hero {
+                padding: 3rem 1.1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+
+            .whatsapp-cta {
+                padding: 2.25rem 1.25rem;
+            }
+
+            .service-card,
+            .contact-card {
+                padding: 2.25rem 1.5rem;
             }
         }
     </style>
