@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Valorización y tasación profesional de inmuebles en Cusco y Valle Sagrado - Imperial Prime Bienes Raíces">
+    <title>Valorización de Inmuebles | Imperial Prime Bienes Raíces</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --black-primary: #0a0a0a;
+            --black-secondary: #141414;
+            --black-tertiary: #1a1a1a;
+            --black-light: #2a2a2a;
+            --gray-dark: #3a3a3a;
+            --gray-medium: #6b6b6b;
+            --gray-light: #9a9a9a;
+            --gray-lighter: #d4d4d4;
+            --white: #ffffff;
+            --gold: #d4af37;
+            --gold-light: #f4d03f;
+            --gold-dark: #b8941f;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black-primary);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* Barra de datos legales */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            background: var(--black-tertiary);
+            border-bottom: 1px solid var(--black-light);
+            padding: 0.5rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            color: var(--gray-light);
+        }
+        .top-bar strong { color: var(--gold); font-weight: 600; }
+        .top-bar-sep { color: var(--gray-dark); margin: 0 0.6rem; }
+        @media (max-width: 600px) {
+            .top-bar { font-size: 0.68rem; padding: 0.4rem 1rem; }
+            .top-bar-sep, .top-bar span:last-child { display: none; }
+            nav { top: 28px; }
+        }
+
+        nav {
+            position: fixed;
+            top: 34px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--black-light);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { display: flex; align-items: center; gap: 0.8rem; }
+        .logo img { height: 55px; }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            line-height: 1.2;
+            color: var(--white);
+        }
+        .logo-text span { display: block; color: var(--gold); font-size: 0.75rem; letter-spacing: 2px; }
+
+        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links a {
+            color: var(--gray-lighter);
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--gold); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+
+        /* Encabezado del servicio */
+        .service-hero {
+            padding: calc(9rem + 34px) 0 4rem;
+            background: linear-gradient(180deg, var(--black-secondary) 0%, var(--black-primary) 100%);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        .back-link:hover { gap: 0.8rem; }
+
+        .service-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            margin-bottom: 1.2rem;
+        }
+        .service-hero h1 span { color: var(--gold); }
+
+        .service-lead {
+            color: var(--gray-light);
+            font-size: 1.15rem;
+            line-height: 1.9;
+            max-width: 850px;
+        }
+
+        .service-facts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--black-light);
+            border-bottom: 1px solid var(--black-light);
+        }
+
+        .fact {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .fact i { color: var(--gold); font-size: 1.3rem; }
+        .fact-label { font-size: 0.75rem; color: var(--gray-light); display: block; }
+        .fact-value { font-size: 1rem; font-weight: 600; color: var(--white); }
+
+        /* Secciones de contenido */
+        .section-block { padding: 4.5rem 0; }
+        .section-block.alt { background: var(--black-secondary); }
+
+        .section-title-sm {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .section-title-sm span { color: var(--gold); }
+
+        .section-intro {
+            color: var(--gray-light);
+            max-width: 820px;
+            margin-bottom: 2.5rem;
+            line-height: 1.9;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .content-card {
+            background: var(--black-tertiary);
+            border: 1px solid var(--black-light);
+            border-radius: 10px;
+            padding: 2.5rem;
+            transition: var(--transition);
+        }
+        .content-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.12);
+        }
+        .content-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .content-card h3 i { color: var(--gold); font-size: 1.2rem; }
+        .content-card > p { color: var(--gray-light); margin-bottom: 1.5rem; line-height: 1.8; }
+
+        .check-list { list-style: none; }
+        .check-list li {
+            padding-left: 1.9rem;
+            position: relative;
+            color: var(--gray-lighter);
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+        .check-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Proceso */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: var(--black-tertiary);
+            border: 1px solid var(--black-light);
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
+            transition: var(--transition);
+        }
+        .step-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+        .step-num {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        .step-card h3 { font-size: 1.15rem; margin-bottom: 0.8rem; }
+        .step-card p { color: var(--gray-light); font-size: 0.95rem; line-height: 1.7; }
+
+        /* Beneficios */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: var(--black-tertiary);
+            border: 1px solid var(--black-light);
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .benefit-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.12);
+        }
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+        }
+        .benefit-card h3 { font-size: 1.15rem; margin-bottom: 0.8rem; }
+        .benefit-card p { color: var(--gray-light); font-size: 0.95rem; line-height: 1.7; }
+
+        /* Otros servicios */
+        .others-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .other-card {
+            background: var(--black-tertiary);
+            border: 1px solid var(--black-light);
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+            display: block;
+        }
+        .other-card i {
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .other-card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+        .other-card p { color: var(--gray-light); font-size: 0.9rem; margin-bottom: 1.2rem; line-height: 1.7; }
+        .other-card .go {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .other-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.12);
+        }
+
+        /* CTA WhatsApp */
+        .whatsapp-cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--black-tertiary);
+            border-radius: 12px;
+            margin: 0 auto 5rem;
+            max-width: 1200px;
+            border: 1px solid var(--gold);
+        }
+        .whatsapp-cta h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .whatsapp-cta p { color: var(--gray-lighter); margin-bottom: 2rem; }
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--black-primary);
+            padding: 1rem 2.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212,175,55,0.3); }
+
+        /* Footer */
+        footer {
+            background: var(--black-secondary);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--black-light);
+        }
+        footer img { height: 45px; margin-bottom: 1rem; }
+        footer p { color: var(--gray-light); font-size: 0.85rem; }
+        footer .footer-legal { color: var(--gray-medium); font-size: 0.78rem; line-height: 1.7; margin-top: 0.8rem; }
+
+        @media (max-width: 768px) {
+            .service-hero { padding: calc(7rem + 34px) 0 3rem; }
+            .service-hero h1 { font-size: 2.1rem; }
+            .service-facts { gap: 1.2rem; }
+            .section-block { padding: 3rem 0; }
+            .section-title-sm { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de datos legales -->
+    <div class="top-bar">
+        <span><strong>RUC:</strong> 20615595617</span>
+        <span class="top-bar-sep">·</span>
+        <span>NUEVO AMANECER SOLUCIONES INTEGRALES E.I.R.L.</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="imperialprime.html" class="logo">
+                <img src="assets/logo.png" alt="Imperial Prime Logo">
+                <div class="logo-text">
+                    IMPERIAL PRIME
+                    <span>BIENES RAÍCES</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="imperialprime.html">Inicio</a></li>
+                <li><a href="imperialprime.html#propiedades">Propiedades</a></li>
+                <li><a href="imperialprime.html#servicios">Servicios</a></li>
+                <li><a href="imperialprime.html#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Encabezado del servicio -->
+    <section class="service-hero">
+        <div class="container">
+            <a href="imperialprime.html#servicios" class="back-link">
+                <i class="fas fa-arrow-left"></i> Volver a Servicios
+            </a>
+
+            <span class="service-badge"><i class="fas fa-calculator"></i> Valorización</span>
+            <h1>Conoce el <span>valor real</span> de tu propiedad</h1>
+            <p class="service-lead">
+                Ponerle precio a un inmueble no es adivinar: es el resultado de un estudio técnico 
+                que combina las características del bien, su estado de conservación, la dinámica 
+                de la zona y los precios reales de mercado. En Imperial Prime elaboramos 
+                valorizaciones profesionales que te dan la certeza de cuánto vale tu propiedad, 
+                ya sea para venderla al precio justo, asegurarla, financiarla o planificar tu 
+                patrimonio.
+            </p>
+
+            <div class="service-facts">
+                <div class="fact">
+                    <i class="fas fa-file-invoice"></i>
+                    <div>
+                        <span class="fact-label">Entregable</span>
+                        <span class="fact-value">Informe técnico de valorización</span>
+                    </div>
+                </div>
+                <div class="fact">
+                    <i class="fas fa-map-location"></i>
+                    <div>
+                        <span class="fact-label">Cobertura</span>
+                        <span class="fact-value">Cusco y Valle Sagrado</span>
+                    </div>
+                </div>
+                <div class="fact">
+                    <i class="fas fa-house-chimney"></i>
+                    <div>
+                        <span class="fact-label">Tipo de inmuebles</span>
+                        <span class="fact-value">Casas, terrenos, locales y más</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿En qué consiste? -->
+    <section class="section-block alt">
+        <div class="container">
+            <h2 class="section-title-sm">¿En qué consiste <span>este servicio?</span></h2>
+            <p class="section-intro">
+                La valorización (o tasación) es un estudio completo de tu inmueble que concluye 
+                en un valor de mercado sustentado y documentado. Es la base para tomar cualquier 
+                decisión inteligente sobre tu propiedad.
+            </p>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3><i class="fas fa-clipboard-list"></i> ¿Qué incluye el estudio?</h3>
+                    <p>
+                        Cada valorización que elaboramos se sustenta en evidencia verificable 
+                        del inmueble y de su entorno, no en estimaciones al azar.
+                    </p>
+                    <ul class="check-list">
+                        <li>Inspección presencial del inmueble y registro de sus características</li>
+                        <li>Evaluación de área, ubicación, antigüedad y estado de conservación</li>
+                        <li>Estudio comparativo de precios reales en la zona</li>
+                        <li>Análisis del entorno: servicios, acceso, plusvalía y desarrollo urbano</li>
+                        <li>Informe técnico con el valor de mercado sustentado</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h3><i class="fas fa-circle-question"></i> ¿Para qué la necesitas?</h3>
+                    <p>
+                        Una valorización profesional es útil en múltiples situaciones. Las más 
+                        comunes entre nuestros clientes son:
+                    </p>
+                    <ul class="check-list">
+                        <li>Vender al precio correcto: ni por debajo ni ahuyentando compradores</li>
+                        <li>Comprar con argumentos para negociar el precio real</li>
+                        <li>Trámites bancarios: créditos hipotecarios y refinanciaciones</li>
+                        <li>Herencias, sucesiones y reparto de bienes</li>
+                        <li>Declaración patrimonial y planificación financiera</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proceso -->
+    <section class="section-block">
+        <div class="container">
+            <h2 class="section-title-sm">¿Cómo <span>trabajamos?</span></h2>
+            <p class="section-intro">
+                Un método estructurado que garantiza un resultado confiable y a tiempo.
+            </p>
+
+            <div class="process-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Solicitud y datos</h3>
+                    <p>
+                        Recibimos tu solicitud y recojemos los datos básicos del inmueble: 
+                        ubicación, tipo, documentos disponibles y propósito de la valorización.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Inspección del inmueble</h3>
+                    <p>
+                        Visitamos la propiedad para evaluar sus características físicas, estado 
+                        de conservación y particularidades que afectan su valor.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Estudio de mercado</h3>
+                    <p>
+                        Analizamos transacciones y ofertas comparables en la zona, así como 
+                        las tendencias y proyectos que influyen en la plusvalía.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h3>Cálculo del valor</h3>
+                    <p>
+                        Aplicamos metodologías de valoración reconocidas para determinar el 
+                        valor de mercado del inmueble de forma objetiva.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">5</div>
+                    <h3>Entrega del informe</h3>
+                    <p>
+                        Te entregamos el informe técnico completo con el valor concluido y 
+                        toda la evidencia que lo sustenta, listo para usarlo donde lo necesites.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="section-block alt">
+        <div class="container">
+            <h2 class="section-title-sm">Beneficios de <span>valorizar con nosotros</span></h2>
+            <p class="section-intro">
+                Un buen informe de valorización se paga solo: evita pérdidas por mal precio y 
+                fortalece tu posición en cualquier negociación.
+            </p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-certificate"></i></div>
+                    <h3>Valor confiable</h3>
+                    <p>
+                        Un valor sustentado en evidencia real del mercado, no en opiniones 
+                        ni referencias sueltas.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-map-location"></i></div>
+                    <h3>Dominio del mercado local</h3>
+                    <p>
+                        Conocemos los precios reales de cada zona de Cusco y el Valle Sagrado, 
+                        distrito por distrito.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-file-invoice"></i></div>
+                    <h3>Informe claro y completo</h3>
+                    <p>
+                        Documento ordenado y comprensible, apto para bancos, notarías, 
+                        entidades y negociaciones.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Respuesta oportuna</h3>
+                    <p>
+                        Coordinamos la inspección y el estudio con agilidad para que tengas 
+                        tu informe cuando lo necesites.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Otros servicios -->
+    <section class="section-block">
+        <div class="container">
+            <h2 class="section-title-sm">Explora <span>otros servicios</span></h2>
+            <p class="section-intro">
+                La valorización suele ser el primer paso. Combínala con el resto de nuestras soluciones.
+            </p>
+
+            <div class="others-grid">
+                <a href="servicio-compra-venta.html" class="other-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Compra y Venta</h3>
+                    <p>Asesoría integral para comprar o vender propiedades con total seguridad.</p>
+                    <span class="go">Ver servicio <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="servicio-agente-inmobiliario.html" class="other-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Agente Inmobiliario</h3>
+                    <p>Atención personalizada y representación profesional en tu operación.</p>
+                    <span class="go">Ver servicio <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="servicio-inversion-inmobiliaria.html" class="other-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Inversión Inmobiliaria</h3>
+                    <p>Identificamos y evaluamos oportunidades para hacer crecer tu capital.</p>
+                    <span class="go">Ver servicio <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA WhatsApp -->
+    <div class="container">
+        <div class="whatsapp-cta">
+            <h3><i class="fab fa-whatsapp" style="color: var(--gold);"></i> ¿Necesitas valorizar tu propiedad?</h3>
+            <p>
+                Escríbenos con los datos de tu inmueble y te cotizamos el estudio de valorización. 
+                Coordinamos la inspección a la brevedad.
+            </p>
+            <a href="https://wa.me/51996989580?text=Hola%20Imperial%20Prime%2C%20necesito%20una%20valorizaci%C3%B3n%20de%20mi%20propiedad"
+               class="btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <img src="assets/logo.png" alt="Imperial Prime Logo">
+        <p>&copy; 2026 Imperial Prime Bienes Raíces. Todos los derechos reservados.</p>
+        <p class="footer-legal">
+            NUEVO AMANECER SOLUCIONES INTEGRALES E.I.R.L. · RUC: 20615595617<br>
+            Urb. Los Licenciados, Pasaje LOA H-7, Distrito de San Sebastián, Cusco
+        </p>
+    </footer>
+
+</body>
+</html>

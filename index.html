@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Imperial Prime Bienes Raíces - Expertos en asesoría inmobiliaria en Cusco y Valle Sagrado">
+    <title>Imperial Prime Bienes Raíces | Cusco - Valle Sagrado</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --black-primary: #0a0a0a;
+            --black-secondary: #131313;
+            --black-tertiary: #181818;
+            --black-light: #262626;
+            --gray-dark: #3a3a3a;
+            --gray-medium: #767676;
+            --gray-light: #a3a3a3;
+            --gray-lighter: #d8d8d8;
+            --white: #ffffff;
+            --white-off: #f2f0ec;
+            --gold: #c9a860;
+            --gold-light: #e2c98a;
+            --gold-dark: #9c7f3f;
+            --line: rgba(255, 255, 255, 0.08);
+            --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.45);
+            --shadow-lift: 0 30px 70px rgba(0, 0, 0, 0.55);
+            --transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black-primary);
+            color: var(--white-off);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            color: var(--white);
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: var(--black-primary);
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--black-primary); }
+        ::-webkit-scrollbar-thumb {
+            background: var(--black-light);
+            border-radius: 10px;
+            border: 2px solid var(--black-primary);
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gray-dark); }
+
+        /* LOADER */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-logo {
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+            animation: pulse 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 24px rgba(201, 168, 96, 0.35));
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.06); opacity: 0.75; }
+        }
+
+        /* BACKGROUND ANIMATION */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 25%, rgba(201, 168, 96, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 80% 75%, rgba(255, 255, 255, 0.03) 0%, transparent 45%),
+                linear-gradient(160deg, #0a0a0a 0%, #121212 50%, #0a0a0a 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                radial-gradient(circle, rgba(201, 168, 96, 0.02) 1px, transparent 1px);
+            background-size: 64px 64px, 110px 110px;
+            animation: moveGrid 40s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(64px, 64px); }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.05;
+            animation: float 26s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            border: 1px solid var(--gray-light);
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            left: 80%;
+            width: 150px;
+            height: 150px;
+            border: 1px solid var(--gold);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation-delay: 6s;
+        }
+
+        .shape:nth-child(3) {
+            top: 80%;
+            left: 20%;
+            width: 70px;
+            height: 70px;
+            background: var(--gray-dark);
+            transform: rotate(45deg);
+            animation-delay: 12s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-40px) rotate(120deg); }
+            66% { transform: translateY(40px) rotate(240deg); }
+        }
+
+        /* NAVIGATION */
+        /* Barra de datos legales */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            background: var(--black-secondary);
+            border-bottom: 1px solid var(--line);
+            padding: 0.55rem 2rem;
+            text-align: center;
+            font-size: 0.72rem;
+            letter-spacing: 0.6px;
+            color: var(--gray-light);
+        }
+        .top-bar strong { color: var(--gold); font-weight: 600; }
+        .top-bar-sep { color: var(--gray-dark); margin: 0 0.6rem; }
+        @media (max-width: 600px) {
+            .top-bar { font-size: 0.65rem; padding: 0.4rem 1rem; }
+            .top-bar-sep, .top-bar span:last-child { display: none; }
+            nav { top: 28px; }
+        }
+
+        nav {
+            position: fixed;
+            top: 34px;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            border-bottom: 1px solid var(--line);
+            z-index: 1000;
+            padding: 1.1rem 0;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 0.6rem 0;
+            background: rgba(8, 8, 8, 0.92);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            opacity: 0.85;
+        }
+
+        .logo img {
+            width: 54px;
+            height: 54px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+            transition: var(--transition);
+        }
+
+        .logo:hover img {
+            transform: scale(1.06);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.2;
+            font-size: 1.08rem;
+            letter-spacing: 0.02em;
+        }
+
+        .logo-text span {
+            display: block;
+            color: var(--gold);
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.75rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-lighter);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            margin-top: 114px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 4rem 2rem;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/fondo.portada.jpg');
+            background-size: cover;
+            background-position: center 60%;
+            z-index: -2;
+            animation: heroZoom 26s ease-in-out infinite alternate;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(8,8,8,0.6) 0%, rgba(8,8,8,0.68) 45%, rgba(8,8,8,0.97) 100%);
+            z-index: -1;
+        }
+
+        @keyframes heroZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo-container {
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-logo {
+            width: 190px;
+            height: 190px;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+            animation: logoFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.65rem 1.8rem;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(201, 168, 96, 0.4);
+            color: var(--gold-light);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+            transition: var(--transition);
+        }
+
+        .hero-badge:hover {
+            border-color: var(--gold);
+            background: rgba(201, 168, 96, 0.08);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            letter-spacing: -0.015em;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+            display: block;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 55%, var(--gold-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: var(--gray-lighter);
+            max-width: 640px;
+            margin: 0 auto 3rem;
+            line-height: 1.85;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.25rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .btn {
+            padding: 1rem 2.4rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--black-primary);
+            border-color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white-off);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        /* PROPERTIES SECTION */
+        .properties {
+            padding: 7.5rem 0;
+            background: var(--black-secondary);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            box-shadow: inset 0 1px 0 var(--line);
+        }
+
+        .properties::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/fondo.portada.2.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            animation: heroZoom 32s ease-in-out infinite alternate;
+        }
+
+        .properties::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(19,19,19,0.94) 0%, rgba(19,19,19,0.9) 45%, rgba(10,10,10,0.97) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4.5rem;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 46px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.3rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            color: var(--gray-lighter);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-label i { color: var(--gold); }
+
+        .section-title {
+            font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--gray-light);
+            font-weight: 300;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.25rem;
+        }
+
+        .property-card {
+            background: rgba(20, 20, 20, 0.62);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .property-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201, 168, 96, 0.45);
+            box-shadow: var(--shadow-lift);
+        }
+
+        .property-image {
+            width: 100%;
+            height: 290px;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
+        }
+
+        .property-card:hover .property-image {
+            transform: scale(1.06);
+        }
+
+        .property-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .property-type {
+            display: inline-block;
+            padding: 0.35rem 0.9rem;
+            background: rgba(201, 168, 96, 0.08);
+            color: var(--gold-light);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            margin-bottom: 1.1rem;
+            border: 1px solid rgba(201, 168, 96, 0.25);
+        }
+
+        .property-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.9rem;
+            color: var(--white);
+        }
+
+        .property-description {
+            color: var(--gray-light);
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* SERVICES SECTION */
+        .services {
+            padding: 7.5rem 0;
+            background: var(--black-primary);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            box-shadow: inset 0 1px 0 var(--line);
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/fondo.portada.3.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            animation: heroZoom 32s ease-in-out infinite alternate;
+        }
+
+        .services::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.9) 45%, rgba(10,10,10,0.97) 100%);
+            z-index: -1;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .service-card {
+            background: rgba(19, 19, 19, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--line);
+            padding: 2.75rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201, 168, 96, 0.4);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .service-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 2.4rem;
+            color: var(--gold);
+            margin-bottom: 1.4rem;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.12);
+        }
+
+        .service-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.9rem;
+            color: var(--white);
+        }
+
+        .service-description {
+            color: var(--gray-light);
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .service-btn {
+            margin-top: 1.75rem;
+            padding: 0.7rem 2rem;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+        }
+
+        /* CONTACT SECTION */
+        .contact {
+            padding: 7.5rem 0;
+            background: var(--black-secondary);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            box-shadow: inset 0 1px 0 var(--line);
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/fondo.portada.4.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            animation: heroZoom 32s ease-in-out infinite alternate;
+        }
+
+        .contact::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(19,19,19,0.95) 0%, rgba(19,19,19,0.9) 45%, rgba(10,10,10,0.97) 100%);
+            z-index: -1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .contact-card {
+            background: rgba(15, 15, 15, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--line);
+            padding: 2.75rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            border-color: rgba(201, 168, 96, 0.4);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .contact-icon {
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 1.4rem;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.12);
+        }
+
+        .contact-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.9rem;
+            color: var(--white);
+        }
+
+        .contact-info {
+            color: var(--gray-light);
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 1.4rem;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            color: var(--white);
+            gap: 0.75rem;
+        }
+
+        .whatsapp-cta {
+            text-align: center;
+            padding: 3.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 168, 96, 0.3);
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 168, 96, 0.04) 0%, transparent 70%);
+            animation: rotate 24s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .whatsapp-cta h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .whatsapp-cta p {
+            color: var(--gray-light);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--black-primary);
+            border-top: 1px solid var(--line);
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--line), transparent);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1.75rem;
+        }
+
+        .footer-logo img {
+            width: 95px;
+            height: 95px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.5));
+            animation: logoFloat 5s ease-in-out infinite;
+        }
+
+        .footer-tagline {
+            color: var(--gray-light);
+            font-weight: 300;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-legal {
+            color: var(--gray-medium);
+            font-size: 0.78rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--line);
+            padding-top: 2rem;
+            margin-top: 2rem;
+            color: var(--gray-medium);
+            font-size: 0.85rem;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero {
+                margin-top: 100px;
+                min-height: 80vh;
+            }
+
+            .hero-logo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .properties,
+            .services,
+            .contact {
+                padding: 5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <img src="assets/logo.png" alt="Imperial Prime Logo" class="loader-logo">
+    </div>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Navigation -->
+    <!-- Barra de datos legales -->
+    <div class="top-bar">
+        <span><strong>RUC:</strong> 20615595617</span>
+        <span class="top-bar-sep">·</span>
+        <span>NUEVO AMANECER SOLUCIONES INTEGRALES E.I.R.L.</span>
+    </div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="assets/logo.png" alt="Imperial Prime Logo">
+                <div class="logo-text">
+                    IMPERIAL PRIME
+                    <span>BIENES RAÍCES</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#propiedades">Propiedades</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-logo-container">
+                <img src="assets/logo.png" alt="Imperial Prime Logo" class="hero-logo">
+            </div>
+            <h1>
+                IMPERIAL PRIME
+                <span>BIENES RAÍCES</span>
+            </h1>
+            <p class="hero-subtitle">
+                Expertos en bienes raíces y asesoría inmobiliaria para toda la macro región sur del Perú, 
+                especialmente en Cusco y el Valle Sagrado. Descubre propiedades exclusivas, 
+                inversiones estratégicas y atención personalizada.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://wa.me/51996989580" class="btn btn-primary" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Contactar Ahora
+                </a>
+                <a href="#propiedades" class="btn btn-secondary">
+                    <i class="fas fa-search"></i>
+                    Ver Propiedades
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section class="properties" id="propiedades">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">
+                    <i class="fas fa-star"></i> Propiedades Destacadas
+                </div>
+                <h2 class="section-title">Propiedades en Venta</h2>
+                <p class="section-subtitle">
+                    Soy Joseph, tu aliado inmobiliario de confianza
+                </p>
+            </div>
+
+            <div class="properties-grid">
+                <div class="property-card fade-in">
+                    <a href="propiedad-quillabamba.html">
+                        <img src="assets/propiedad.01.quillabamba.png" 
+                             alt="Propiedad en Quillabamba" class="property-image">
+                    </a>
+                    <div class="property-content">
+                        <span class="property-type">Propiedad en Venta</span>
+                        <h3 class="property-title">Quillabamba</h3>
+                        <p class="property-description">
+                            Terreno con excelente ubicación en Quillabamba, ideal para vivienda o inversión. 
+                            Zona en crecimiento con fácil acceso y gran potencial de plusvalía.
+                        </p>
+                        <a href="propiedad-quillabamba.html" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-arrow-right"></i> Más Información
+                        </a>
+                    </div>
+                </div>
+
+                <div class="property-card fade-in">
+                    <a href="propiedad-los-incas.html">
+                        <img src="assets/propiedad.02.los.inkas.png" 
+                             alt="Propiedad en Los Incas" class="property-image">
+                    </a>
+                    <div class="property-content">
+                        <span class="property-type">Documentos en Regla</span>
+                        <h3 class="property-title">Los Incas</h3>
+                        <p class="property-description">
+                            Propiedad en el sector Los Incas con toda la documentación en regla, 
+                            lista para transferencia inmediata y sin contratiempos legales.
+                        </p>
+                        <a href="propiedad-los-incas.html" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-arrow-right"></i> Más Información
+                        </a>
+                    </div>
+                </div>
+
+                <div class="property-card fade-in">
+                    <a href="propiedad-urb-tio.html">
+                        <img src="assets/propiedad.03.urb.tio.png" 
+                             alt="Departamentos en Urb. Tío" class="property-image">
+                    </a>
+                    <div class="property-content">
+                        <span class="property-type">En Preventa</span>
+                        <h3 class="property-title">Urb. Tío</h3>
+                        <p class="property-description">
+                            Departamentos en preventa en la Urb. Tío, con precios preferenciales 
+                            para los primeros interesados. Aprovecha la etapa inicial de construcción.
+                        </p>
+                        <a href="propiedad-urb-tio.html" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-arrow-right"></i> Más Información
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">
+                    <i class="fas fa-briefcase"></i> Nuestros Servicios
+                </div>
+                <h2 class="section-title">Soluciones inmobiliarias completas</h2>
+                <p class="section-subtitle">
+                    Te acompañamos en cada etapa del proceso con profesionalismo y experiencia
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="service-title">Compra y Venta</h3>
+                    <p class="service-description">
+                        Asesoramiento profesional para la compra y venta de propiedades. 
+                        Te ayudamos a encontrar la mejor opción o a vender al mejor precio.
+                    </p>
+                    <a href="servicio-compra-venta.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="service-title">Agente Inmobiliario</h3>
+                    <p class="service-description">
+                        Atención personalizada y estrategias de negociación efectivas. 
+                        Representamos tus intereses con ética y profesionalismo.
+                    </p>
+                    <a href="servicio-agente-inmobiliario.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="service-title">Inversión Inmobiliaria</h3>
+                    <p class="service-description">
+                        Evaluación de oportunidades de inversión en la macro región sur peruana. 
+                        Maximizamos el retorno de tu inversión.
+                    </p>
+                    <a href="servicio-inversion-inmobiliaria.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3 class="service-title">Valorización</h3>
+                    <p class="service-description">
+                        Estudios de mercado y valorización profesional de inmuebles. 
+                        Conoce el valor real de tu propiedad con expertos certificados.
+                    </p>
+                    <a href="servicio-valorizacion.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">
+                    <i class="fas fa-envelope"></i> Contacto
+                </div>
+                <h2 class="section-title">Estamos para ayudarte</h2>
+                <p class="section-subtitle">
+                    Contáctanos y te asesoramos sin compromiso
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="contact-title">Teléfono / WhatsApp</h3>
+                    <p class="contact-info">+51 996 989 580</p>
+                    <a href="https://wa.me/51996989580" class="contact-link" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Escríbenos ahora
+                    </a>
+                </div>
+
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="contact-title">Dirección</h3>
+                    <p class="contact-info">
+                        URB LOS LICENCIADOS PASAJE LOA H-7<br>
+                        CUSCO - PERÚ
+                    </p>
+                    <a href="https://maps.app.goo.gl/tFbMVevL72wKv6QF9" class="contact-link" target="_blank">
+                        <i class="fas fa-location-arrow"></i>
+                        Ver en mapa
+                    </a>
+                </div>
+
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="contact-title">Horario de Atención</h3>
+                    <p class="contact-info">
+                        De lunes a Sábado<br>
+                        9:00 A.M - 5:00 P.M
+                    </p>
+                    <a href="https://wa.me/51996989580?text=Hola%20Imperial%20Prime%2C%20quisiera%20agendar%20una%20cita" class="contact-link" target="_blank">
+                        <i class="fas fa-calendar-check"></i>
+                        Agendar cita
+                    </a>
+                </div>
+            </div>
+
+            <div class="whatsapp-cta fade-in">
+                <h3>
+                    <i class="fab fa-whatsapp" style="color: var(--gold);"></i>
+                    ¿Listo para encontrar tu propiedad ideal?
+                </h3>
+                <p>
+                    Especialistas en el mercado inmobiliario del Cusco y Valle Sagrado. 
+                    Escríbenos y te ayudamos a hacer realidad tu sueño.
+                </p>
+                <a href="https://wa.me/51996989580?text=Hola%20Imperial%20Prime%2C%20estoy%20interesado%20en%20sus%20servicios%20inmobiliarios" 
+                   class="btn btn-primary" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    ESCRIBIR POR WHATSAPP
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Imperial Prime Logo">
+            </div>
+            <p class="footer-tagline">
+                Expertos en bienes raíces en Cusco y Valle Sagrado
+            </p>
+            <p class="footer-legal">
+                NUEVO AMANECER SOLUCIONES INTEGRALES E.I.R.L. · RUC: 20615595617<br>
+                Urb. Los Licenciados, Pasaje LOA H-7, Distrito de San Sebastián, Cusco
+            </p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imperial Prime Bienes Raíces. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Remove loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+            shapes.forEach((shape, index) => {
+                const speed = 0.5 + (index * 0.2);
+                shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.5}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>
