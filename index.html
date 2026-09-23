@@ -42,6 +42,13 @@
             scroll-behavior: smooth;
         }
 
+        #inicio,
+        #propiedades,
+        #servicios,
+        #contacto {
+            scroll-margin-top: 150px;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--black-primary);
@@ -993,6 +1000,13 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
+            #inicio,
+            #propiedades,
+            #servicios,
+            #contacto {
+                scroll-margin-top: 90px;
+            }
+
             .nav-container {
                 padding: 0 1.25rem;
             }
@@ -1032,9 +1046,10 @@
                 width: 100%;
                 font-size: 0.95rem;
                 padding: 0.95rem 1.2rem;
-                border: 1px solid var(--line);
+                border: 1px solid rgba(201, 168, 96, 0.35);
                 border-radius: 10px;
-                background: rgba(255, 255, 255, 0.03);
+                background: rgba(255, 255, 255, 0.07);
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
                 transition: var(--transition);
             }
 
