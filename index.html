@@ -338,6 +338,39 @@
             width: 100%;
         }
 
+        .nav-socials {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            margin-left: 2.5rem;
+            padding-left: 2.5rem;
+            border-left: 1px solid var(--line);
+        }
+
+        .nav-socials a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            color: var(--gray-lighter);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .nav-socials a:hover {
+            color: var(--black-primary);
+            background: var(--gold);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .mobile-socials {
+            display: none;
+        }
+
         .mobile-menu {
             display: none;
             flex-direction: column;
@@ -973,6 +1006,33 @@
             margin-bottom: 2rem;
         }
 
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.1rem;
+            margin-bottom: 2.25rem;
+        }
+
+        .footer-socials a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            color: var(--gray-lighter);
+            font-size: 1.05rem;
+            transition: var(--transition);
+        }
+
+        .footer-socials a:hover {
+            color: var(--black-primary);
+            background: var(--gold);
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
         .footer-legal {
             color: var(--gray-medium);
             font-size: 0.78rem;
@@ -1021,6 +1081,38 @@
 
             .nav-container {
                 padding: 0 1.25rem;
+            }
+
+            .nav-socials {
+                display: none;
+            }
+
+            .mobile-socials {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                margin-top: 0.5rem;
+            }
+
+            .mobile-socials a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 46px;
+                height: 46px;
+                border-radius: 50%;
+                border: 1px solid rgba(201, 168, 96, 0.35);
+                background: rgba(255, 255, 255, 0.07);
+                color: var(--gold);
+                font-size: 1.1rem;
+                transition: var(--transition);
+            }
+
+            .mobile-socials a:hover,
+            .mobile-socials a:active {
+                background: var(--gold);
+                border-color: var(--gold);
+                color: var(--black-primary);
             }
 
             .nav-links {
@@ -1214,7 +1306,23 @@
                 <li><a href="#propiedades"><i class="fa-solid fa-building"></i><span>Propiedades</span></a></li>
                 <li><a href="#servicios"><i class="fa-solid fa-handshake"></i><span>Servicios</span></a></li>
                 <li><a href="#contacto"><i class="fa-solid fa-envelope"></i><span>Contacto</span></a></li>
+                <li class="mobile-socials">
+                    <a href="https://www.instagram.com/imperialprimeinmobiliaria/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Imperial Prime">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/imperialprimebienesraices/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Imperial Prime">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
             </ul>
+            <div class="nav-socials">
+                <a href="https://www.instagram.com/imperialprimeinmobiliaria/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Imperial Prime">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/imperialprimebienesraices/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Imperial Prime">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
             <div class="mobile-menu" id="mobileMenuBtn" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -1480,6 +1588,14 @@
             <p class="footer-tagline">
                 Expertos en bienes raíces en Cusco y Valle Sagrado
             </p>
+            <div class="footer-socials">
+                <a href="https://www.instagram.com/imperialprimeinmobiliaria/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Imperial Prime">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/imperialprimebienesraices/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Imperial Prime">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
             <p class="footer-legal">
                 NUEVO AMANECER SOLUCIONES INTEGRALES E.I.R.L. · RUC: 20615595617<br>
                 Urb. Los Licenciados, Pasaje LOA H-7, Distrito de San Sebastián, Cusco
@@ -1531,8 +1647,14 @@
         // Mobile menu links: close the panel, then scroll to the section
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function(e) {
-                e.preventDefault();
                 const targetId = this.getAttribute('href');
+                if (!targetId || targetId.charAt(0) !== '#') {
+                    // Enlaces externos (ej. redes sociales): solo cerramos el menú,
+                    // dejamos que el navegador abra el enlace normalmente.
+                    closeMenu();
+                    return;
+                }
+                e.preventDefault();
                 const target = targetId && targetId.length > 1 ? document.querySelector(targetId) : null;
                 const wasOpen = navLinksEl.classList.contains('active');
                 closeMenu();
