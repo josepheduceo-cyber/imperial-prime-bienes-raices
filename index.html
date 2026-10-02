@@ -823,6 +823,177 @@
             letter-spacing: 1.5px;
         }
 
+
+        /* ALIANZA LEGAL - BLACK WOLF */
+        .legal-partner {
+            padding: 7.5rem 0;
+            background: var(--black-secondary);
+            position: relative;
+            box-shadow: inset 0 1px 0 var(--line);
+        }
+
+        .partner-box {
+            display: grid;
+            grid-template-columns: 1.1fr 1.4fr;
+            gap: 3.5rem;
+            align-items: center;
+            background: rgba(19, 19, 19, 0.7);
+            border: 1px solid rgba(201, 168, 96, 0.28);
+            border-radius: 10px;
+            padding: 3.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .partner-brand {
+            text-align: center;
+            border-right: 1px solid var(--line);
+            padding-right: 3.5rem;
+        }
+
+        .partner-brand h3 {
+            font-size: 1.3rem;
+            color: var(--white);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .partner-brand > span {
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .partner-text p {
+            color: var(--gray-light);
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 1.75rem;
+        }
+
+        .partner-steps {
+            list-style: none;
+            display: grid;
+            gap: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .partner-steps li {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            color: var(--gray-light);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .partner-steps li i {
+            color: var(--gold);
+            margin-top: 0.3rem;
+        }
+
+        .partner-steps li strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .partner-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 900px) {
+            .legal-partner { padding: 5rem 0; }
+            .partner-box { grid-template-columns: 1fr; padding: 2.25rem 1.5rem; gap: 2.25rem; }
+            .partner-brand { border-right: none; border-bottom: 1px solid var(--line); padding-right: 0; padding-bottom: 2rem; }
+        }
+
+
+        /* LOGOS 3D CON GROSOR */
+        .logos3d {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo3d-x {
+            color: var(--gold);
+            font-size: 1.4rem;
+            font-weight: 300;
+        }
+
+        .logo3d-stage {
+            width: 130px;
+            height: 130px;
+            perspective: 800px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .logo3d-stage::after {
+            content: '';
+            position: absolute;
+            left: 15%;
+            right: 15%;
+            bottom: -22px;
+            height: 14px;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.65), transparent 70%);
+            filter: blur(4px);
+        }
+
+        .logo3d-tilt {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transform: rotateX(-8deg);
+        }
+
+        .logo3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: spin3d 10s linear infinite;
+            will-change: transform;
+        }
+
+        .logo3d-stage:hover .logo3d { animation-play-state: paused; }
+
+        .logo3d img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-width: none;
+            margin: 0;
+        }
+
+        .logo3d img.face {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .logo3d img.edge {
+            filter: brightness(0.5) sepia(1) saturate(2.4) hue-rotate(-12deg);
+        }
+
+        @keyframes spin3d {
+            from { transform: rotateY(0deg); }
+            to   { transform: rotateY(360deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .logo3d { animation: none; transform: rotateY(-25deg); }
+        }
+
+        @media (max-width: 400px) {
+            .logo3d-stage { width: 105px; height: 105px; }
+        }
+
         /* CONTACT SECTION */
         .contact {
             padding: 7.5rem 0;
@@ -1393,24 +1564,6 @@
                 </div>
 
                 <div class="property-card fade-in">
-                    <a href="propiedad-los-incas.html">
-                        <img src="assets/propiedad.02.los.inkas.png" 
-                             alt="Propiedad en Los Incas" class="property-image">
-                    </a>
-                    <div class="property-content">
-                        <span class="property-type">Documentos en Regla</span>
-                        <h3 class="property-title">Los Incas</h3>
-                        <p class="property-description">
-                            Propiedad en el sector Los Incas con toda la documentación en regla, 
-                            lista para transferencia inmediata y sin contratiempos legales.
-                        </p>
-                        <a href="propiedad-los-incas.html" class="btn btn-secondary" style="width: 100%; justify-content: center;">
-                            <i class="fas fa-arrow-right"></i> Más Información
-                        </a>
-                    </div>
-                </div>
-
-                <div class="property-card fade-in">
                     <a href="propiedad-urb-tio.html">
                         <img src="assets/propiedad.03.urb.tio.png" 
                              alt="Departamentos en Urb. Tío" class="property-image">
@@ -1500,6 +1653,161 @@
                         <i class="fas fa-arrow-right"></i> Conocer Más
                     </a>
                 </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-map-location-dot"></i>
+                    </div>
+                    <h3 class="service-title">Terrenos y Lotes</h3>
+                    <p class="service-description">
+                        Búsqueda y venta de terrenos, lotes y parcelas en Cusco y el Valle Sagrado. Evaluamos ubicación, acceso, servicios y potencial de crecimiento.
+                    </p>
+                    <a href="servicio-terrenos-lotes.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3 class="service-title">Alquiler y Administración</h3>
+                    <p class="service-description">
+                        Alquiler de casas, departamentos y locales. Gestionamos la búsqueda de inquilinos, contratos y seguimiento para que tu inmueble rinda sin preocupaciones.
+                    </p>
+                    <a href="servicio-alquiler-administracion.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h3 class="service-title">Proyectos en Preventa</h3>
+                    <p class="service-description">
+                        Acceso a departamentos y proyectos en etapa inicial con precios preferenciales. Te orientamos para elegir la mejor oportunidad de inversión.
+                    </p>
+                    <a href="servicio-proyectos-preventa.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="service-title">Asesoría Legal Inmobiliaria</h3>
+                    <p class="service-description">
+                        Respaldo jurídico en cada operación junto a nuestro socio estratégico Black Wolf Legal Corp: revisión de partidas, cargas, contratos y minutas.
+                    </p>
+                    <a href="servicio-asesoria-legal-inmobiliaria.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3 class="service-title">Saneamiento y Formalización</h3>
+                    <p class="service-description">
+                        Regularización registral, rectificación de áreas, independización e inmatriculación de predios para que tu propiedad quede en regla.
+                    </p>
+                    <a href="servicio-saneamiento-formalizacion.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <h3 class="service-title">Trámites de Transferencia</h3>
+                    <p class="service-description">
+                        Acompañamiento en toda la documentación de la compraventa: verificación, firma, escritura e inscripción en Registros Públicos.
+                    </p>
+                    <a href="servicio-tramites-transferencia.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="service-title">Marketing y Difusión</h3>
+                    <p class="service-description">
+                        Promocionamos tu propiedad con material profesional, presencia en redes sociales y difusión dirigida para llegar a compradores reales.
+                    </p>
+                    <a href="servicio-marketing-difusion.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="service-title">Acompañamiento Postventa</h3>
+                    <p class="service-description">
+                        Seguimos a tu lado después de la operación: inscripción final, entrega de documentos y orientación para lo que necesites a futuro.
+                    </p>
+                    <a href="servicio-acompanamiento-postventa.html" class="btn btn-secondary service-btn">
+                        <i class="fas fa-arrow-right"></i> Conocer Más
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Partner Section -->
+    <section class="legal-partner" id="respaldo-legal">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">
+                    <i class="fas fa-scale-balanced"></i> Socio Estratégico Legal
+                </div>
+                <h2 class="section-title">Acompañamiento legal completo</h2>
+                <p class="section-subtitle">
+                    Cada operación inmobiliaria cuenta con el respaldo de nuestros abogados aliados
+                </p>
+            </div>
+
+            <div class="partner-box fade-in">
+                <div class="partner-brand">
+                    <div class="logos3d">
+                        <div class="logo3d-stage">
+                            <div class="logo3d-tilt"><div class="logo3d" data-src="assets/logo.png" data-alt="Imperial Prime"></div></div>
+                        </div>
+                        <span class="logo3d-x">×</span>
+                        <div class="logo3d-stage">
+                            <div class="logo3d-tilt"><div class="logo3d" data-src="https://josepheduceo-cyber.github.io/black-wolf-legal-corp/assets/logo.png" data-alt="Black Wolf Legal Corp"></div></div>
+                        </div>
+                    </div>
+                    <h3>IMPERIAL PRIME × BLACK WOLF</h3>
+                    <span>Alianza estratégica</span>
+                </div>
+                <div class="partner-text">
+                    <p>
+                        Imperial Prime y Black Wolf Legal Corp trabajan juntos para que compres, vendas o inviertas
+                        con total seguridad jurídica. No estás solo en ningún paso: desde la primera visita hasta la
+                        inscripción final de tu propiedad, tienes asesoría legal profesional a tu lado.
+                    </p>
+                    <ul class="partner-steps">
+                        <li><i class="fas fa-check-circle"></i><span><strong>Antes de la operación:</strong> revisión de partidas, cargas, gravámenes y situación registral del inmueble.</span></li>
+                        <li><i class="fas fa-check-circle"></i><span><strong>Durante la negociación:</strong> contratos, minutas y transferencias elaborados y revisados por abogados.</span></li>
+                        <li><i class="fas fa-check-circle"></i><span><strong>Después de la compra:</strong> inscripción registral, saneamiento y seguimiento hasta que todo quede en regla.</span></li>
+                    </ul>
+                    <div class="partner-actions">
+                        <a href="https://josepheduceo-cyber.github.io/black-wolf-legal-corp/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-arrow-up-right-from-square"></i> Conocer Black Wolf
+                        </a>
+                        <a href="https://wa.me/51992708510?text=Hola%2C%20vengo%20de%20Imperial%20Prime%20y%20quiero%20asesor%C3%ADa%20legal" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> Consulta Legal
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1587,6 +1895,9 @@
             </div>
             <p class="footer-tagline">
                 Expertos en bienes raíces en Cusco y Valle Sagrado
+            </p>
+            <p class="footer-tagline" style="font-size:0.85rem;">
+                Socio estratégico legal: <a href="https://josepheduceo-cyber.github.io/black-wolf-legal-corp/" target="_blank" rel="noopener noreferrer" style="color:var(--gold-light);">Black Wolf Legal Corp</a>
             </p>
             <div class="footer-socials">
                 <a href="https://www.instagram.com/imperialprimeinmobiliaria/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Imperial Prime">
@@ -1719,6 +2030,37 @@
                 shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.5}deg)`;
             });
         });
+    </script>
+    <script>
+        // Logos 3D con grosor: capas apiladas en profundidad (extrusión)
+        (function () {
+            var LAYERS = 26, GAP = 1; // grosor aprox. = LAYERS * GAP px
+            document.querySelectorAll('.logo3d').forEach(function (box) {
+                var src = box.getAttribute('data-src');
+                var alt = box.getAttribute('data-alt') || '';
+                var half = (LAYERS - 1) * GAP / 2;
+                for (var i = 0; i < LAYERS; i++) {
+                    var img = document.createElement('img');
+                    img.src = src;
+                    img.alt = (i === LAYERS - 1) ? alt : '';
+                    if (i !== LAYERS - 1) img.setAttribute('aria-hidden', 'true');
+                    img.draggable = false;
+                    var z = -half + i * GAP;
+                    if (i === LAYERS - 1) {            // cara frontal
+                        img.className = 'face';
+                        img.style.transform = 'translateZ(' + z + 'px)';
+                    } else if (i === 0) {              // cara trasera (sin espejo)
+                        img.className = 'face';
+                        img.style.transform = 'translateZ(' + z + 'px) rotateY(180deg)';
+                    } else {                           // canto / densidad
+                        img.className = 'edge';
+                        img.style.transform = 'translateZ(' + z + 'px)';
+                    }
+                    img.onerror = function () { this.style.display = 'none'; };
+                    box.appendChild(img);
+                }
+            });
+        })();
     </script>
 </body>
 </html>
